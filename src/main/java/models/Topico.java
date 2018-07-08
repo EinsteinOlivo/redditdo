@@ -36,40 +36,46 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries(
 {
-    @NamedQuery(name = "Topicos.findAll", query = "SELECT t FROM Topicos t")
-    , @NamedQuery(name = "Topicos.findByIdTopico", query = "SELECT t FROM Topicos t WHERE t.idTopico = :idTopico")
-    , @NamedQuery(name = "Topicos.findByNombreTopico", query = "SELECT t FROM Topicos t WHERE t.nombreTopico = :nombreTopico")
-    , @NamedQuery(name = "Topicos.findByFechaCreacionTopico", query = "SELECT t FROM Topicos t WHERE t.fechaCreacionTopico = :fechaCreacionTopico")
-    , @NamedQuery(name = "Topicos.findByEstadoTopico", query = "SELECT t FROM Topicos t WHERE t.estadoTopico = :estadoTopico")
+    @NamedQuery(name = "Topico.findAll", query = "SELECT t FROM Topico t")
+    , @NamedQuery(name = "Topico.findByIdTopico", query = "SELECT t FROM Topico t WHERE t.idTopico = :idTopico")
+    , @NamedQuery(name = "Topico.findByNombreTopico", query = "SELECT t FROM Topico t WHERE t.nombreTopico = :nombreTopico")
+    , @NamedQuery(name = "Topico.findByFechaCreacionTopico", query = "SELECT t FROM Topico t WHERE t.fechaCreacionTopico = :fechaCreacionTopico")
+    , @NamedQuery(name = "Topico.findByEstadoTopico", query = "SELECT t FROM Topico t WHERE t.estadoTopico = :estadoTopico")
 })
-public class Topicos implements Serializable
+public class Topico implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "IdTopico")
     private Integer idTopico;
+    
     @Size(max = 200)
     @Column(name = "NombreTopico")
     private String nombreTopico;
+    
     @Column(name = "FechaCreacionTopico")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacionTopico;
+    
     @Column(name = "EstadoTopico")
     private Boolean estadoTopico;
+    
     @JoinColumn(name = "IdUsuario", referencedColumnName = "IdUsuario")
     @ManyToOne(optional = false)
-    private Usuarios idUsuario;
+    private Usuario idUsuario;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTopico")
-    private List<PublicacionesTopicos> publicacionesTopicosList;
+    private List<PublicacionTopico> publicacionesTopicosList;
 
-    public Topicos()
+    public Topico()
     {
     }
 
-    public Topicos(Integer idTopico)
+    public Topico(Integer idTopico)
     {
         this.idTopico = idTopico;
     }
@@ -114,23 +120,23 @@ public class Topicos implements Serializable
         this.estadoTopico = estadoTopico;
     }
 
-    public Usuarios getIdUsuario()
+    public Usuario getIdUsuario()
     {
         return idUsuario;
     }
 
-    public void setIdUsuario(Usuarios idUsuario)
+    public void setIdUsuario(Usuario idUsuario)
     {
         this.idUsuario = idUsuario;
     }
 
     @XmlTransient
-    public List<PublicacionesTopicos> getPublicacionesTopicosList()
+    public List<PublicacionTopico> getPublicacionesTopicosList()
     {
         return publicacionesTopicosList;
     }
 
-    public void setPublicacionesTopicosList(List<PublicacionesTopicos> publicacionesTopicosList)
+    public void setPublicacionesTopicosList(List<PublicacionTopico> publicacionesTopicosList)
     {
         this.publicacionesTopicosList = publicacionesTopicosList;
     }
@@ -147,11 +153,11 @@ public class Topicos implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Topicos))
+        if (!(object instanceof Topico))
         {
             return false;
         }
-        Topicos other = (Topicos) object;
+        Topico other = (Topico) object;
         if ((this.idTopico == null && other.idTopico != null) || (this.idTopico != null && !this.idTopico.equals(other.idTopico)))
         {
             return false;
@@ -164,5 +170,4 @@ public class Topicos implements Serializable
     {
         return "models.Topicos[ idTopico=" + idTopico + " ]";
     }
-    
 }

@@ -32,12 +32,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries(
 {
-    @NamedQuery(name = "Comentarios.findAll", query = "SELECT c FROM Comentarios c")
-    , @NamedQuery(name = "Comentarios.findByIdComentario", query = "SELECT c FROM Comentarios c WHERE c.idComentario = :idComentario")
-    , @NamedQuery(name = "Comentarios.findByContenidoComentario", query = "SELECT c FROM Comentarios c WHERE c.contenidoComentario = :contenidoComentario")
-    , @NamedQuery(name = "Comentarios.findByFechaComentario", query = "SELECT c FROM Comentarios c WHERE c.fechaComentario = :fechaComentario")
+    @NamedQuery(name = "Comentario.findAll", query = "SELECT c FROM Comentario c")
+    , @NamedQuery(name = "Comentario.findByIdComentario", query = "SELECT c FROM Comentario c WHERE c.idComentario = :idComentario")
+    , @NamedQuery(name = "Comentario.findByContenidoComentario", query = "SELECT c FROM Comentario c WHERE c.contenidoComentario = :contenidoComentario")
+    , @NamedQuery(name = "Comentario.findByFechaComentario", query = "SELECT c FROM Comentario c WHERE c.fechaComentario = :fechaComentario")
 })
-public class Comentarios implements Serializable
+public class Comentario implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
@@ -58,17 +58,17 @@ public class Comentarios implements Serializable
     
     @JoinColumn(name = "IdUsuario", referencedColumnName = "IdUsuario")
     @ManyToOne(optional = false)
-    private Usuarios idUsuario;
+    private Usuario idUsuario;
     
     @JoinColumn(name = "IdPublicacion", referencedColumnName = "IdPublicacion")
     @ManyToOne(optional = false)
-    private Publicaciones idPublicacion;
+    private Publicacion idPublicacion;
 
-    public Comentarios()
+    public Comentario()
     {
     }
 
-    public Comentarios(Integer idComentario)
+    public Comentario(Integer idComentario)
     {
         this.idComentario = idComentario;
     }
@@ -103,22 +103,22 @@ public class Comentarios implements Serializable
         this.fechaComentario = fechaComentario;
     }
 
-    public Usuarios getIdUsuario()
+    public Usuario getIdUsuario()
     {
         return idUsuario;
     }
 
-    public void setIdUsuario(Usuarios idUsuario)
+    public void setIdUsuario(Usuario idUsuario)
     {
         this.idUsuario = idUsuario;
     }
 
-    public Publicaciones getIdPublicacion()
+    public Publicacion getIdPublicacion()
     {
         return idPublicacion;
     }
 
-    public void setIdPublicacion(Publicaciones idPublicacion)
+    public void setIdPublicacion(Publicacion idPublicacion)
     {
         this.idPublicacion = idPublicacion;
     }
@@ -135,11 +135,11 @@ public class Comentarios implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Comentarios))
+        if (!(object instanceof Comentario))
         {
             return false;
         }
-        Comentarios other = (Comentarios) object;
+        Comentario other = (Comentario) object;
         if ((this.idComentario == null && other.idComentario != null) || (this.idComentario != null && !this.idComentario.equals(other.idComentario)))
         {
             return false;

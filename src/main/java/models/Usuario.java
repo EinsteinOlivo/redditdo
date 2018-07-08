@@ -31,46 +31,54 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries(
 {
-    @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u")
-    , @NamedQuery(name = "Usuarios.findByIdUsuario", query = "SELECT u FROM Usuarios u WHERE u.idUsuario = :idUsuario")
-    , @NamedQuery(name = "Usuarios.findByNombreUsuario", query = "SELECT u FROM Usuarios u WHERE u.nombreUsuario = :nombreUsuario")
-    , @NamedQuery(name = "Usuarios.findByNickNameUsuario", query = "SELECT u FROM Usuarios u WHERE u.nickNameUsuario = :nickNameUsuario")
-    , @NamedQuery(name = "Usuarios.findByClaveUsuario", query = "SELECT u FROM Usuarios u WHERE u.claveUsuario = :claveUsuario")
-    , @NamedQuery(name = "Usuarios.findByCorreoUsuario", query = "SELECT u FROM Usuarios u WHERE u.correoUsuario = :correoUsuario")
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+    , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
+    , @NamedQuery(name = "Usuario.findByNombreUsuario", query = "SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario")
+    , @NamedQuery(name = "Usuario.findByNickNameUsuario", query = "SELECT u FROM Usuario u WHERE u.nickNameUsuario = :nickNameUsuario")
+    , @NamedQuery(name = "Usuario.findByClaveUsuario", query = "SELECT u FROM Usuario u WHERE u.claveUsuario = :claveUsuario")
+    , @NamedQuery(name = "Usuario.findByCorreoUsuario", query = "SELECT u FROM Usuario u WHERE u.correoUsuario = :correoUsuario")
 })
-public class Usuarios implements Serializable
+public class Usuario implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "IdUsuario")
     private Integer idUsuario;
+    
     @Size(max = 100)
     @Column(name = "NombreUsuario")
     private String nombreUsuario;
+    
     @Size(max = 35)
     @Column(name = "NickNameUsuario")
     private String nickNameUsuario;
+    
     @Size(max = 35)
     @Column(name = "ClaveUsuario")
     private String claveUsuario;
+    
     @Size(max = 60)
     @Column(name = "CorreoUsuario")
     private String correoUsuario;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
-    private List<Publicaciones> publicacionesList;
+    private List<Publicacion> publicacionesList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
-    private List<Topicos> topicosList;
+    private List<Topico> topicosList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
-    private List<Comentarios> comentariosList;
+    private List<Comentario> comentariosList;
 
-    public Usuarios()
+    public Usuario()
     {
     }
 
-    public Usuarios(Integer idUsuario)
+    public Usuario(Integer idUsuario)
     {
         this.idUsuario = idUsuario;
     }
@@ -126,34 +134,34 @@ public class Usuarios implements Serializable
     }
 
     @XmlTransient
-    public List<Publicaciones> getPublicacionesList()
+    public List<Publicacion> getPublicacionesList()
     {
         return publicacionesList;
     }
 
-    public void setPublicacionesList(List<Publicaciones> publicacionesList)
+    public void setPublicacionesList(List<Publicacion> publicacionesList)
     {
         this.publicacionesList = publicacionesList;
     }
 
     @XmlTransient
-    public List<Topicos> getTopicosList()
+    public List<Topico> getTopicosList()
     {
         return topicosList;
     }
 
-    public void setTopicosList(List<Topicos> topicosList)
+    public void setTopicosList(List<Topico> topicosList)
     {
         this.topicosList = topicosList;
     }
 
     @XmlTransient
-    public List<Comentarios> getComentariosList()
+    public List<Comentario> getComentariosList()
     {
         return comentariosList;
     }
 
-    public void setComentariosList(List<Comentarios> comentariosList)
+    public void setComentariosList(List<Comentario> comentariosList)
     {
         this.comentariosList = comentariosList;
     }
@@ -170,11 +178,11 @@ public class Usuarios implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuarios))
+        if (!(object instanceof Usuario))
         {
             return false;
         }
-        Usuarios other = (Usuarios) object;
+        Usuario other = (Usuario) object;
         if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario)))
         {
             return false;

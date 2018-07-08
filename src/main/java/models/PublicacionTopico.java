@@ -28,30 +28,33 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries(
 {
-    @NamedQuery(name = "PublicacionesTopicos.findAll", query = "SELECT p FROM PublicacionesTopicos p")
-    , @NamedQuery(name = "PublicacionesTopicos.findByIdPublicacionTopico", query = "SELECT p FROM PublicacionesTopicos p WHERE p.idPublicacionTopico = :idPublicacionTopico")
+    @NamedQuery(name = "PublicacionTopico.findAll", query = "SELECT p FROM PublicacionTopico p")
+    , @NamedQuery(name = "PublicacionTopico.findByIdPublicacionTopico", query = "SELECT p FROM PublicacionTopico p WHERE p.idPublicacionTopico = :idPublicacionTopico")
 })
-public class PublicacionesTopicos implements Serializable
+public class PublicacionTopico implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "IdPublicacionTopico")
     private Integer idPublicacionTopico;
+    
     @JoinColumn(name = "IdPublicacion", referencedColumnName = "IdPublicacion")
     @ManyToOne(optional = false)
-    private Publicaciones idPublicacion;
+    private Publicacion idPublicacion;
+    
     @JoinColumn(name = "IdTopico", referencedColumnName = "IdTopico")
     @ManyToOne(optional = false)
-    private Topicos idTopico;
+    private Topico idTopico;
 
-    public PublicacionesTopicos()
+    public PublicacionTopico()
     {
     }
 
-    public PublicacionesTopicos(Integer idPublicacionTopico)
+    public PublicacionTopico(Integer idPublicacionTopico)
     {
         this.idPublicacionTopico = idPublicacionTopico;
     }
@@ -66,22 +69,22 @@ public class PublicacionesTopicos implements Serializable
         this.idPublicacionTopico = idPublicacionTopico;
     }
 
-    public Publicaciones getIdPublicacion()
+    public Publicacion getIdPublicacion()
     {
         return idPublicacion;
     }
 
-    public void setIdPublicacion(Publicaciones idPublicacion)
+    public void setIdPublicacion(Publicacion idPublicacion)
     {
         this.idPublicacion = idPublicacion;
     }
 
-    public Topicos getIdTopico()
+    public Topico getIdTopico()
     {
         return idTopico;
     }
 
-    public void setIdTopico(Topicos idTopico)
+    public void setIdTopico(Topico idTopico)
     {
         this.idTopico = idTopico;
     }
@@ -98,11 +101,11 @@ public class PublicacionesTopicos implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PublicacionesTopicos))
+        if (!(object instanceof PublicacionTopico))
         {
             return false;
         }
-        PublicacionesTopicos other = (PublicacionesTopicos) object;
+        PublicacionTopico other = (PublicacionTopico) object;
         if ((this.idPublicacionTopico == null && other.idPublicacionTopico != null) || (this.idPublicacionTopico != null && !this.idPublicacionTopico.equals(other.idPublicacionTopico)))
         {
             return false;

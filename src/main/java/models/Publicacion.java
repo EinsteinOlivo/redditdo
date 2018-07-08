@@ -36,50 +36,59 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries(
 {
-    @NamedQuery(name = "Publicaciones.findAll", query = "SELECT p FROM Publicaciones p")
-    , @NamedQuery(name = "Publicaciones.findByIdPublicacion", query = "SELECT p FROM Publicaciones p WHERE p.idPublicacion = :idPublicacion")
-    , @NamedQuery(name = "Publicaciones.findByTituloPublicacion", query = "SELECT p FROM Publicaciones p WHERE p.tituloPublicacion = :tituloPublicacion")
-    , @NamedQuery(name = "Publicaciones.findByContenidoPublicacion", query = "SELECT p FROM Publicaciones p WHERE p.contenidoPublicacion = :contenidoPublicacion")
-    , @NamedQuery(name = "Publicaciones.findByImagenPublicacion", query = "SELECT p FROM Publicaciones p WHERE p.imagenPublicacion = :imagenPublicacion")
-    , @NamedQuery(name = "Publicaciones.findByFechaPublicacion", query = "SELECT p FROM Publicaciones p WHERE p.fechaPublicacion = :fechaPublicacion")
-    , @NamedQuery(name = "Publicaciones.findByLikesPublicacion", query = "SELECT p FROM Publicaciones p WHERE p.likesPublicacion = :likesPublicacion")
+    @NamedQuery(name = "Publicacion.findAll", query = "SELECT p FROM Publicacion p")
+    , @NamedQuery(name = "Publicacion.findByIdPublicacion", query = "SELECT p FROM Publicacion p WHERE p.idPublicacion = :idPublicacion")
+    , @NamedQuery(name = "Publicacion.findByTituloPublicacion", query = "SELECT p FROM Publicacion p WHERE p.tituloPublicacion = :tituloPublicacion")
+    , @NamedQuery(name = "Publicacion.findByContenidoPublicacion", query = "SELECT p FROM Publicacion p WHERE p.contenidoPublicacion = :contenidoPublicacion")
+    , @NamedQuery(name = "Publicacion.findByImagenPublicacion", query = "SELECT p FROM Publicacion p WHERE p.imagenPublicacion = :imagenPublicacion")
+    , @NamedQuery(name = "Publicacion.findByFechaPublicacion", query = "SELECT p FROM Publicacion p WHERE p.fechaPublicacion = :fechaPublicacion")
+    , @NamedQuery(name = "Publicacion.findByLikesPublicacion", query = "SELECT p FROM Publicacion p WHERE p.likesPublicacion = :likesPublicacion")
 })
-public class Publicaciones implements Serializable
+public class Publicacion implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "IdPublicacion")
     private Integer idPublicacion;
+    
     @Size(max = 100)
     @Column(name = "TituloPublicacion")
     private String tituloPublicacion;
+    
     @Size(max = 10000)
     @Column(name = "ContenidoPublicacion")
     private String contenidoPublicacion;
+    
     @Size(max = 10000)
     @Column(name = "ImagenPublicacion")
     private String imagenPublicacion;
+    
     @Column(name = "FechaPublicacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPublicacion;
+    
     @Column(name = "LikesPublicacion")
     private Long likesPublicacion;
+    
     @JoinColumn(name = "IdUsuario", referencedColumnName = "IdUsuario")
     @ManyToOne(optional = false)
-    private Usuarios idUsuario;
+    private Usuario idUsuario;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicacion")
-    private List<Comentarios> comentariosList;
+    private List<Comentario> comentariosList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicacion")
-    private List<PublicacionesTopicos> publicacionesTopicosList;
+    private List<PublicacionTopico> publicacionesTopicosList;
 
-    public Publicaciones()
+    public Publicacion()
     {
     }
 
-    public Publicaciones(Integer idPublicacion)
+    public Publicacion(Integer idPublicacion)
     {
         this.idPublicacion = idPublicacion;
     }
@@ -144,34 +153,34 @@ public class Publicaciones implements Serializable
         this.likesPublicacion = likesPublicacion;
     }
 
-    public Usuarios getIdUsuario()
+    public Usuario getIdUsuario()
     {
         return idUsuario;
     }
 
-    public void setIdUsuario(Usuarios idUsuario)
+    public void setIdUsuario(Usuario idUsuario)
     {
         this.idUsuario = idUsuario;
     }
 
     @XmlTransient
-    public List<Comentarios> getComentariosList()
+    public List<Comentario> getComentariosList()
     {
         return comentariosList;
     }
 
-    public void setComentariosList(List<Comentarios> comentariosList)
+    public void setComentariosList(List<Comentario> comentariosList)
     {
         this.comentariosList = comentariosList;
     }
 
     @XmlTransient
-    public List<PublicacionesTopicos> getPublicacionesTopicosList()
+    public List<PublicacionTopico> getPublicacionesTopicosList()
     {
         return publicacionesTopicosList;
     }
 
-    public void setPublicacionesTopicosList(List<PublicacionesTopicos> publicacionesTopicosList)
+    public void setPublicacionesTopicosList(List<PublicacionTopico> publicacionesTopicosList)
     {
         this.publicacionesTopicosList = publicacionesTopicosList;
     }
@@ -188,11 +197,11 @@ public class Publicaciones implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Publicaciones))
+        if (!(object instanceof Publicacion))
         {
             return false;
         }
-        Publicaciones other = (Publicaciones) object;
+        Publicacion other = (Publicacion) object;
         if ((this.idPublicacion == null && other.idPublicacion != null) || (this.idPublicacion != null && !this.idPublicacion.equals(other.idPublicacion)))
         {
             return false;
