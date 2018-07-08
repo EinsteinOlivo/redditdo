@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchemainstance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <!--Unidad de persistencia para la base de datos-->
+  <persistence-unit name="redditdoPU" transaction-type="RESOURCE_LOCAL">
+      <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+<!--      <class>mx.com.gm.sga.domain.Persona</class>
+      <class>mx.com.gm.sga.domain.Usuario</class>-->
+      <properties>
+          <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/REDDITDO?zeroDateTimeBehavior=convertToNull"/>
+          <property name="javax.persistence.jdbc.user" value="root"/>
+          <property name="javax.persistence.jdbc.password" value="1234"/>
+          <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+          <property name="eclipselink.logging.level.sql" value="FINE"/>
+          <property name="eclipselink.logging.parameters" value="true"/>
+          <property name="eclipselink.canonicalmodel.subpackage" value="dev"/>
+      </properties>
+  </persistence-unit>
+</persistence>
